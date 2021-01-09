@@ -6,6 +6,7 @@ import com.eg.testsharding.bean.Author;
 import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.mapper.AuthorMapper;
 import com.eg.testsharding.bean.mapper.PoemMapper;
+import com.github.nobodxbodon.zhconverter.简繁转换类;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,4 +68,5 @@ public class PrepareDatabase {
             }
         }
     }
+
 }

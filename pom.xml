@@ -75,7 +75,17 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.75</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.nobodxbodon</groupId>
+            <artifactId>zhconverter</artifactId>
+            <version>0.0.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.program_in_chinese</groupId>
+                    <artifactId>junit4_in_chinese</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
     </dependencies>
 
