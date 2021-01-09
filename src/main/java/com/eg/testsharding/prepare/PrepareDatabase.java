@@ -6,6 +6,7 @@ import com.eg.testsharding.bean.Author;
 import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.mapper.AuthorMapper;
 import com.eg.testsharding.bean.mapper.PoemMapper;
+import com.eg.testsharding.util.SimplifiedAndTraditionalUtil;
 import com.github.nobodxbodon.zhconverter.简繁转换类;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -13,10 +14,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,11 +44,24 @@ public class PrepareDatabase {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             List<Poem> poemList = JSON.parseArray(jsonString, Poem.class);
             for (Poem poem : poemList) {
+                //朝代
                 if (file.getName().contains("song")) {
                     poem.setDynasty("宋");
                 } else if (file.getName().contains("tang")) {
                     poem.setDynasty("唐");
                 }
+                //github原本是，没一句诗是组成列表，我把它直接拼接到一起
+                List<String> paragraphList = JSON.parseArray(poem.getParagraphs(), String.class);
+                StringBuilder paragraphs = new StringBuilder();
+                for (String paragraph : paragraphList) {
+                    paragraphs.append(paragraph);
+                }
+                poem.setParagraphs(paragraphs.toString());
+                //最后一步，繁体转简体
+                poem.setTitle(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getTitle()));
+                poem.setAuthor(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getAuthor()));
+                poem.setParagraphs(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getParagraphs()));
+                //保存到数据库
                 poemMapper.insert(poem);
                 System.out.println(poem);
             }
