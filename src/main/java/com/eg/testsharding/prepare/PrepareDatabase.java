@@ -77,10 +77,17 @@ public class PrepareDatabase {
         if (files == null) {
             return;
         }
+        long id = 1;
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             List<Author> authorList = JSON.parseArray(jsonString, Author.class);
             for (Author author : authorList) {
+                //设置id
+                author.setId(id);
+                id++;
+                //最后一步，繁体转简体
+                author.setName(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getName()));
+                author.setDescription(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getDescription()));
                 authorMapper.insert(author);
                 System.out.println(author);
             }
