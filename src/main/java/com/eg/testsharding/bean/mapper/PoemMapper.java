@@ -2,10 +2,12 @@ package com.eg.testsharding.bean.mapper;
 
 import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.PoemExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface PoemMapper {
     long countByExample(PoemExample example);
 

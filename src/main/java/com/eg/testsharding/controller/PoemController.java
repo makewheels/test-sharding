@@ -1,6 +1,5 @@
 package com.eg.testsharding.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.PoemExample;
 import com.eg.testsharding.bean.mapper.PoemMapper;
@@ -26,9 +25,8 @@ public class PoemController {
      */
     @RequestMapping("getById")
     @ResponseBody
-    public String getById(@RequestParam long id) {
-        Poem poem = poemMapper.selectByPrimaryKey(id);
-        return JSON.toJSONString(poem);
+    public Poem getById(@RequestParam long id) {
+        return poemMapper.selectByPrimaryKey(id);
     }
 
     /**
@@ -39,11 +37,10 @@ public class PoemController {
      */
     @RequestMapping("queryByParagraphs")
     @ResponseBody
-    public String queryByParagraphs(@RequestParam String paragraphs) {
+    public List<Poem> queryByParagraphs(@RequestParam String paragraphs) {
         PoemExample poemExample = new PoemExample();
         poemExample.createCriteria().andParagraphsLike("%" + paragraphs + "%");
-        List<Poem> poemList = poemMapper.selectByExample(poemExample);
-        return JSON.toJSONString(poemList);
+        return poemMapper.selectByExample(poemExample);
     }
 
 }

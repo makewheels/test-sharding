@@ -2,10 +2,12 @@ package com.eg.testsharding.bean.mapper;
 
 import com.eg.testsharding.bean.Author;
 import com.eg.testsharding.bean.AuthorExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface AuthorMapper {
     long countByExample(AuthorExample example);
 
