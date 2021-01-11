@@ -19,12 +19,12 @@ public class PoemController {
     private PoemMapper poemMapper;
 
     /**
-     * http://localhost:8080/test-sharding/poem/get?id=4
+     * http://localhost:8080/test-sharding/poem/getById?id=4
      *
      * @param id
      * @return
      */
-    @RequestMapping("get")
+    @RequestMapping("getById")
     @ResponseBody
     public String getById(@RequestParam long id) {
         Poem poem = poemMapper.selectByPrimaryKey(id);

@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * 准备古诗
+ * 插入需要fastjson在bean上注释
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestShardingApplication.class})
