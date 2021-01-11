@@ -105,8 +105,8 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.eg.testsharding.bean.Poem">
-        insert into poem (id, poem_id, title, dynasty, author, paragraphs)
-        values (#{id,jdbcType=BIGINT}, #{poemId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        insert into poem (poem_id, title, dynasty, author, paragraphs)
+        values (#{poemId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
                 #{dynasty,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{paragraphs,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.eg.testsharding.bean.Poem">

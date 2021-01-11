@@ -103,8 +103,8 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.eg.testsharding.bean.Author">
-        insert into author (id, name, author_id, description)
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{authorId,jdbcType=VARCHAR},
+        insert into author (name, author_id, description)
+        values (#{name,jdbcType=VARCHAR}, #{authorId,jdbcType=VARCHAR},
                 #{description,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.eg.testsharding.bean.Author">

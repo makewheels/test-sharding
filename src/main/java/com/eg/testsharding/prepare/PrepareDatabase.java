@@ -61,7 +61,7 @@ public class PrepareDatabase {
                 poem.setAuthor(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getAuthor()));
                 poem.setParagraphs(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getParagraphs()));
                 //设置id
-                poem.setId(id);
+//                poem.setId(id);
                 System.out.println(id);
                 id++;
                 //保存到数据库
