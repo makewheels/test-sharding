@@ -4,8 +4,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @SpringBootApplication
+//        (exclude = {DataSourceAutoConfiguration.class})
 @MapperScan("com.eg.testsharding.bean.mapper")
 public class TestShardingApplication {
 
