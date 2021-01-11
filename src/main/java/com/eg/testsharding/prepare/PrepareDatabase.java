@@ -38,7 +38,6 @@ public class PrepareDatabase {
         if (files == null) {
             return;
         }
-        long id = 1;
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             List<Poem> poemList = JSON.parseArray(jsonString, Poem.class);
@@ -60,10 +59,6 @@ public class PrepareDatabase {
                 poem.setTitle(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getTitle()));
                 poem.setAuthor(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getAuthor()));
                 poem.setParagraphs(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getParagraphs()));
-                //设置id
-//                poem.setId(id);
-                System.out.println(id);
-                id++;
                 //保存到数据库
                 poemMapper.insert(poem);
                 System.out.println(poem);
@@ -78,14 +73,10 @@ public class PrepareDatabase {
         if (files == null) {
             return;
         }
-        long id = 1;
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             List<Author> authorList = JSON.parseArray(jsonString, Author.class);
             for (Author author : authorList) {
-                //设置id
-                author.setId(id);
-                id++;
                 //最后一步，繁体转简体
                 author.setName(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getName()));
                 author.setDescription(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getDescription()));
