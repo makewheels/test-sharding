@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//        (exclude = {DataSourceAutoConfiguration.class})
 @MapperScan("com.eg.testsharding.bean.mapper")
 public class TestShardingApplication {
 
