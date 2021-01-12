@@ -40,6 +40,8 @@ public class PrepareDatabase {
         if (files == null) {
             return;
         }
+        //自增的序列号，决定进哪个库
+        long sequence = 1;
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             List<GithubPoem> githubPoemList = JSON.parseArray(jsonString, GithubPoem.class);
@@ -55,15 +57,19 @@ public class PrepareDatabase {
                 }
                 //朝代
                 if (file.getName().contains("song")) {
-                    poem.setDynasty("song");
+                    poem.setDynasty("宋");
                 } else if (file.getName().contains("tang")) {
-                    poem.setDynasty("tang");
+                    poem.setDynasty("唐");
                 }
                 poem.setParagraphs(paragraphs.toString());
                 //最后一步，繁体转简体
                 poem.setTitle(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getTitle()));
                 poem.setAuthor(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getAuthor()));
                 poem.setParagraphs(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getParagraphs()));
+                //设置id，决定进哪个库
+                poem.setSequence(sequence);
+                System.out.println(sequence);
+                sequence++;
                 //保存到数据库
                 poemMapper.insert(poem);
                 System.out.println(poem);
@@ -78,6 +84,8 @@ public class PrepareDatabase {
         if (files == null) {
             return;
         }
+        //自增的序列号，决定进哪个库
+        long sequence = 1;
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             List<GithubAuthor> githubAuthorList = JSON.parseArray(jsonString, GithubAuthor.class);
@@ -88,13 +96,18 @@ public class PrepareDatabase {
                 String fileName = file.getName();
                 //作者是哪代诗人
                 if (fileName.contains("song")) {
-                    author.setDynasty("song");
+                    author.setDynasty("宋");
                 } else if (fileName.contains("tang")) {
-                    author.setDynasty("tang");
+                    author.setDynasty("唐");
                 }
                 //最后一步，繁体转简体
                 author.setName(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getName()));
                 author.setDescription(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getDescription()));
+                //设置id，决定进哪个库
+                author.setSequence(sequence);
+                System.out.println(sequence);
+                sequence++;
+                //保存到数据库
                 authorMapper.insert(author);
                 System.out.println(author);
             }

@@ -3,6 +3,7 @@
 <mapper namespace="com.eg.testsharding.bean.mapper.AuthorMapper">
   <resultMap id="BaseResultMap" type="com.eg.testsharding.bean.Author">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sequence" jdbcType="BIGINT" property="sequence" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="dynasty" jdbcType="VARCHAR" property="dynasty" />
     <result column="description" jdbcType="VARCHAR" property="description" />
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, dynasty, description
+    id, sequence, name, dynasty, description
   </sql>
   <select id="selectByExample" parameterType="com.eg.testsharding.bean.AuthorExample" resultMap="BaseResultMap">
     select
@@ -100,16 +101,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eg.testsharding.bean.Author">
-    insert into author (name, dynasty,
-      description)
-    values (#{name,jdbcType=VARCHAR}, #{dynasty,jdbcType=VARCHAR},
-      #{description,jdbcType=VARCHAR})
+    insert into author (sequence, name,
+      dynasty, description)
+    values (#{sequence,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+      #{dynasty,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eg.testsharding.bean.Author">
     insert into author
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="sequence != null">
+        sequence,
       </if>
       <if test="name != null">
         name,
@@ -124,6 +128,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -148,6 +155,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
+      <if test="record.sequence != null">
+        sequence = #{record.sequence,jdbcType=BIGINT},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -165,6 +175,7 @@
   <update id="updateByExample" parameterType="map">
     update author
     set id = #{record.id,jdbcType=BIGINT},
+      sequence = #{record.sequence,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       dynasty = #{record.dynasty,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR}
@@ -175,6 +186,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.eg.testsharding.bean.Author">
     update author
     <set>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=BIGINT},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -189,7 +203,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.eg.testsharding.bean.Author">
     update author
-    set name = #{name,jdbcType=VARCHAR},
+    set sequence = #{sequence,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
       dynasty = #{dynasty,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
