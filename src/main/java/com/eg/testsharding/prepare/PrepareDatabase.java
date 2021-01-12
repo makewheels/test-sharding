@@ -7,6 +7,7 @@ import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.mapper.AuthorMapper;
 import com.eg.testsharding.bean.mapper.PoemMapper;
 import com.eg.testsharding.github.GithubAuthor;
+import com.eg.testsharding.github.GithubPoem;
 import com.eg.testsharding.util.SimplifiedAndTraditionalUtil;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -41,19 +42,22 @@ public class PrepareDatabase {
         }
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            List<Poem> poemList = JSON.parseArray(jsonString, Poem.class);
-            for (Poem poem : poemList) {
+            List<GithubPoem> githubPoemList = JSON.parseArray(jsonString, GithubPoem.class);
+            for (GithubPoem githubPoem : githubPoemList) {
+                Poem poem = new Poem();
+                //拷贝属性
+                poem.setTitle(githubPoem.getTitle());
+                poem.setAuthor(githubPoem.getAuthor());
+                //github原本是，没一句诗是组成列表，我把它直接拼接到一起
+                StringBuilder paragraphs = new StringBuilder();
+                for (String paragraph : githubPoem.getParagraphs()) {
+                    paragraphs.append(paragraph);
+                }
                 //朝代
                 if (file.getName().contains("song")) {
                     poem.setDynasty("宋");
                 } else if (file.getName().contains("tang")) {
                     poem.setDynasty("唐");
-                }
-                //github原本是，没一句诗是组成列表，我把它直接拼接到一起
-                List<String> paragraphList = JSON.parseArray(poem.getParagraphs(), String.class);
-                StringBuilder paragraphs = new StringBuilder();
-                for (String paragraph : paragraphList) {
-                    paragraphs.append(paragraph);
                 }
                 poem.setParagraphs(paragraphs.toString());
                 //最后一步，繁体转简体
