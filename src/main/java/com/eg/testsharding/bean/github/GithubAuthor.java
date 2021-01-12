@@ -1,4 +1,4 @@
-package com.eg.testsharding.github;
+package com.eg.testsharding.bean.github;
 
 import lombok.Data;
 
