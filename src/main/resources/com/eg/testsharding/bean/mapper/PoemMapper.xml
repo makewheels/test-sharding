@@ -5,7 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="sequence" jdbcType="BIGINT" property="sequence" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="dynasty" jdbcType="VARCHAR" property="dynasty" />
+    <result column="dynasty" jdbcType="INTEGER" property="dynasty" />
     <result column="author" jdbcType="VARCHAR" property="author" />
     <result column="paragraphs" jdbcType="VARCHAR" property="paragraphs" />
   </resultMap>
@@ -106,7 +106,7 @@
       dynasty, author, paragraphs
       )
     values (#{sequence,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
-      #{dynasty,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{paragraphs,jdbcType=VARCHAR}
+      #{dynasty,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{paragraphs,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.eg.testsharding.bean.Poem">
@@ -142,7 +142,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="dynasty != null">
-        #{dynasty,jdbcType=VARCHAR},
+        #{dynasty,jdbcType=INTEGER},
       </if>
       <if test="author != null">
         #{author,jdbcType=VARCHAR},
@@ -171,7 +171,7 @@
         title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.dynasty != null">
-        dynasty = #{record.dynasty,jdbcType=VARCHAR},
+        dynasty = #{record.dynasty,jdbcType=INTEGER},
       </if>
       <if test="record.author != null">
         author = #{record.author,jdbcType=VARCHAR},
@@ -189,7 +189,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       sequence = #{record.sequence,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
-      dynasty = #{record.dynasty,jdbcType=VARCHAR},
+      dynasty = #{record.dynasty,jdbcType=INTEGER},
       author = #{record.author,jdbcType=VARCHAR},
       paragraphs = #{record.paragraphs,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -206,7 +206,7 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="dynasty != null">
-        dynasty = #{dynasty,jdbcType=VARCHAR},
+        dynasty = #{dynasty,jdbcType=INTEGER},
       </if>
       <if test="author != null">
         author = #{author,jdbcType=VARCHAR},
@@ -221,7 +221,7 @@
     update poem
     set sequence = #{sequence,jdbcType=BIGINT},
       title = #{title,jdbcType=VARCHAR},
-      dynasty = #{dynasty,jdbcType=VARCHAR},
+      dynasty = #{dynasty,jdbcType=INTEGER},
       author = #{author,jdbcType=VARCHAR},
       paragraphs = #{paragraphs,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}

@@ -57,9 +57,9 @@ public class PrepareDatabase {
                 }
                 //朝代
                 if (file.getName().contains("song")) {
-                    poem.setDynasty("宋");
+                    poem.setDynasty(0);
                 } else if (file.getName().contains("tang")) {
-                    poem.setDynasty("唐");
+                    poem.setDynasty(1);
                 }
                 poem.setParagraphs(paragraphs.toString());
                 //最后一步，繁体转简体
@@ -96,9 +96,9 @@ public class PrepareDatabase {
                 String fileName = file.getName();
                 //作者是哪代诗人
                 if (fileName.contains("song")) {
-                    author.setDynasty("宋");
+                    author.setDynasty(0);
                 } else if (fileName.contains("tang")) {
-                    author.setDynasty("唐");
+                    author.setDynasty(1);
                 }
                 //最后一步，繁体转简体
                 author.setName(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getName()));

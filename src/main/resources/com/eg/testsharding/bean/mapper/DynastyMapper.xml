@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eg.testsharding.bean.mapper.AuthorMapper">
-  <resultMap id="BaseResultMap" type="com.eg.testsharding.bean.Author">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="sequence" jdbcType="BIGINT" property="sequence" />
+<mapper namespace="com.eg.testsharding.bean.mapper.DynastyMapper">
+  <resultMap id="BaseResultMap" type="com.eg.testsharding.bean.Dynasty">
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="dynasty" jdbcType="INTEGER" property="dynasty" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,16 +64,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, sequence, name, dynasty, description
+    id, name
   </sql>
-  <select id="selectByExample" parameterType="com.eg.testsharding.bean.AuthorExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.eg.testsharding.bean.DynastyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from author
+    from dynasty
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,88 +81,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from author
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from author
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.eg.testsharding.bean.AuthorExample">
-    delete from author
+  <delete id="deleteByExample" parameterType="com.eg.testsharding.bean.DynastyExample">
+    delete from dynasty
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.eg.testsharding.bean.Author">
-    insert into author (sequence, name,
-      dynasty, description)
-    values (#{sequence,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
-      #{dynasty,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.eg.testsharding.bean.Dynasty">
+    insert into dynasty (id, name)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.eg.testsharding.bean.Author">
-    insert into author
+  <insert id="insertSelective" parameterType="com.eg.testsharding.bean.Dynasty">
+    insert into dynasty
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="sequence != null">
-        sequence,
-      </if>
       <if test="name != null">
         name,
-      </if>
-      <if test="dynasty != null">
-        dynasty,
-      </if>
-      <if test="description != null">
-        description,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="sequence != null">
-        #{sequence,jdbcType=BIGINT},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="dynasty != null">
-        #{dynasty,jdbcType=INTEGER},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.eg.testsharding.bean.AuthorExample" resultType="java.lang.Long">
-    select count(*) from author
+  <select id="countByExample" parameterType="com.eg.testsharding.bean.DynastyExample" resultType="java.lang.Long">
+    select count(*) from dynasty
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update author
+    update dynasty
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.sequence != null">
-        sequence = #{record.sequence,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dynasty != null">
-        dynasty = #{record.dynasty,jdbcType=INTEGER},
-      </if>
-      <if test="record.description != null">
-        description = #{record.description,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -173,40 +131,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update author
-    set id = #{record.id,jdbcType=BIGINT},
-      sequence = #{record.sequence,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      dynasty = #{record.dynasty,jdbcType=INTEGER},
-      description = #{record.description,jdbcType=VARCHAR}
+    update dynasty
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eg.testsharding.bean.Author">
-    update author
-    <set>
-      <if test="sequence != null">
-        sequence = #{sequence,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="dynasty != null">
-        dynasty = #{dynasty,jdbcType=INTEGER},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.eg.testsharding.bean.Author">
-    update author
-    set sequence = #{sequence,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      dynasty = #{dynasty,jdbcType=INTEGER},
-      description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

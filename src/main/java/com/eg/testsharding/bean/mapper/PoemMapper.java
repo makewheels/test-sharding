@@ -4,6 +4,7 @@ import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.PoemExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -30,4 +31,5 @@ public interface PoemMapper {
     int updateByPrimaryKeySelective(Poem record);
 
     int updateByPrimaryKey(Poem record);
+
 }

@@ -3,14 +3,14 @@ package com.eg.testsharding.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorExample {
+public class DynastyExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public AuthorExample() {
+    public DynastyExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -114,113 +114,53 @@ public class AuthorExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Long value) {
+        public Criteria andIdEqualTo(Integer value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Long value) {
+        public Criteria andIdNotEqualTo(Integer value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Long value) {
+        public Criteria andIdGreaterThan(Integer value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Long value) {
+        public Criteria andIdLessThan(Integer value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Long value) {
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Long> values) {
+        public Criteria andIdIn(List<Integer> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Long> values) {
+        public Criteria andIdNotIn(List<Integer> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Long value1, Long value2) {
+        public Criteria andIdBetween(Integer value1, Integer value2) {
             addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Long value1, Long value2) {
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
             addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceIsNull() {
-            addCriterion("sequence is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceIsNotNull() {
-            addCriterion("sequence is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceEqualTo(Long value) {
-            addCriterion("sequence =", value, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceNotEqualTo(Long value) {
-            addCriterion("sequence <>", value, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceGreaterThan(Long value) {
-            addCriterion("sequence >", value, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceGreaterThanOrEqualTo(Long value) {
-            addCriterion("sequence >=", value, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceLessThan(Long value) {
-            addCriterion("sequence <", value, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceLessThanOrEqualTo(Long value) {
-            addCriterion("sequence <=", value, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceIn(List<Long> values) {
-            addCriterion("sequence in", values, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceNotIn(List<Long> values) {
-            addCriterion("sequence not in", values, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceBetween(Long value1, Long value2) {
-            addCriterion("sequence between", value1, value2, "sequence");
-            return (Criteria) this;
-        }
-
-        public Criteria andSequenceNotBetween(Long value1, Long value2) {
-            addCriterion("sequence not between", value1, value2, "sequence");
             return (Criteria) this;
         }
 
@@ -291,136 +231,6 @@ public class AuthorExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyIsNull() {
-            addCriterion("dynasty is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyIsNotNull() {
-            addCriterion("dynasty is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyEqualTo(Integer value) {
-            addCriterion("dynasty =", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyNotEqualTo(Integer value) {
-            addCriterion("dynasty <>", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyGreaterThan(Integer value) {
-            addCriterion("dynasty >", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyGreaterThanOrEqualTo(Integer value) {
-            addCriterion("dynasty >=", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyLessThan(Integer value) {
-            addCriterion("dynasty <", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyLessThanOrEqualTo(Integer value) {
-            addCriterion("dynasty <=", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyIn(List<Integer> values) {
-            addCriterion("dynasty in", values, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyNotIn(List<Integer> values) {
-            addCriterion("dynasty not in", values, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyBetween(Integer value1, Integer value2) {
-            addCriterion("dynasty between", value1, value2, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyNotBetween(Integer value1, Integer value2) {
-            addCriterion("dynasty not between", value1, value2, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIsNull() {
-            addCriterion("description is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIsNotNull() {
-            addCriterion("description is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionEqualTo(String value) {
-            addCriterion("description =", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotEqualTo(String value) {
-            addCriterion("description <>", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionGreaterThan(String value) {
-            addCriterion("description >", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
-            addCriterion("description >=", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLessThan(String value) {
-            addCriterion("description <", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLessThanOrEqualTo(String value) {
-            addCriterion("description <=", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionLike(String value) {
-            addCriterion("description like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotLike(String value) {
-            addCriterion("description not like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIn(List<String> values) {
-            addCriterion("description in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotIn(List<String> values) {
-            addCriterion("description not in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionBetween(String value1, String value2) {
-            addCriterion("description between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotBetween(String value1, String value2) {
-            addCriterion("description not between", value1, value2, "description");
             return (Criteria) this;
         }
     }

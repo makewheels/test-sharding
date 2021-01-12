@@ -7,7 +7,7 @@ public class Poem {
 
     private String title;
 
-    private String dynasty;
+    private Integer dynasty;
 
     private String author;
 
@@ -37,12 +37,12 @@ public class Poem {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getDynasty() {
+    public Integer getDynasty() {
         return dynasty;
     }
 
-    public void setDynasty(String dynasty) {
-        this.dynasty = dynasty == null ? null : dynasty.trim();
+    public void setDynasty(Integer dynasty) {
+        this.dynasty = dynasty;
     }
 
     public String getAuthor() {

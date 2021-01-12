@@ -304,62 +304,52 @@ public class PoemExample {
             return (Criteria) this;
         }
 
-        public Criteria andDynastyEqualTo(String value) {
+        public Criteria andDynastyEqualTo(Integer value) {
             addCriterion("dynasty =", value, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyNotEqualTo(String value) {
+        public Criteria andDynastyNotEqualTo(Integer value) {
             addCriterion("dynasty <>", value, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyGreaterThan(String value) {
+        public Criteria andDynastyGreaterThan(Integer value) {
             addCriterion("dynasty >", value, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyGreaterThanOrEqualTo(String value) {
+        public Criteria andDynastyGreaterThanOrEqualTo(Integer value) {
             addCriterion("dynasty >=", value, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyLessThan(String value) {
+        public Criteria andDynastyLessThan(Integer value) {
             addCriterion("dynasty <", value, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyLessThanOrEqualTo(String value) {
+        public Criteria andDynastyLessThanOrEqualTo(Integer value) {
             addCriterion("dynasty <=", value, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyLike(String value) {
-            addCriterion("dynasty like", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyNotLike(String value) {
-            addCriterion("dynasty not like", value, "dynasty");
-            return (Criteria) this;
-        }
-
-        public Criteria andDynastyIn(List<String> values) {
+        public Criteria andDynastyIn(List<Integer> values) {
             addCriterion("dynasty in", values, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyNotIn(List<String> values) {
+        public Criteria andDynastyNotIn(List<Integer> values) {
             addCriterion("dynasty not in", values, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyBetween(String value1, String value2) {
+        public Criteria andDynastyBetween(Integer value1, Integer value2) {
             addCriterion("dynasty between", value1, value2, "dynasty");
             return (Criteria) this;
         }
 
-        public Criteria andDynastyNotBetween(String value1, String value2) {
+        public Criteria andDynastyNotBetween(Integer value1, Integer value2) {
             addCriterion("dynasty not between", value1, value2, "dynasty");
             return (Criteria) this;
         }
