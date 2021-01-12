@@ -1,16 +1,15 @@
 package com.eg.testsharding.bean;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 @Data
 public class Author {
-    private Long id;
-    private String name;    //诗人名
+    private String id;
 
-    @JSONField(name = "id")
-    private String authorId;
+    private String name;
 
-    @JSONField(name = "desc")
+    private String dynasty;
+
     private String description;
+
 }

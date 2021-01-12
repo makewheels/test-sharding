@@ -6,6 +6,7 @@ import com.eg.testsharding.bean.Author;
 import com.eg.testsharding.bean.Poem;
 import com.eg.testsharding.bean.mapper.AuthorMapper;
 import com.eg.testsharding.bean.mapper.PoemMapper;
+import com.eg.testsharding.github.GithubAuthor;
 import com.eg.testsharding.util.SimplifiedAndTraditionalUtil;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -75,8 +76,18 @@ public class PrepareDatabase {
         }
         for (File file : files) {
             String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            List<Author> authorList = JSON.parseArray(jsonString, Author.class);
-            for (Author author : authorList) {
+            List<GithubAuthor> githubAuthorList = JSON.parseArray(jsonString, GithubAuthor.class);
+            for (GithubAuthor githubAuthor : githubAuthorList) {
+                Author author = new Author();
+                author.setName(githubAuthor.getName());
+                author.setDescription(githubAuthor.getDesc());
+                String fileName = file.getName();
+                //作者是哪代诗人
+                if (fileName.contains("song")) {
+                    author.setDynasty("宋");
+                } else if (fileName.contains("tang")) {
+                    author.setDynasty("唐");
+                }
                 //最后一步，繁体转简体
                 author.setName(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getName()));
                 author.setDescription(SimplifiedAndTraditionalUtil.traditionalToSimplified(author.getDescription()));
