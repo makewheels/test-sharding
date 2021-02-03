@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.eg.testsharding.TestShardingApplication;
 import com.eg.testsharding.bean.Author;
 import com.eg.testsharding.bean.Poem;
-import com.eg.testsharding.bean.mapper.AuthorMapper;
-import com.eg.testsharding.bean.mapper.PoemMapper;
 import com.eg.testsharding.bean.github.GithubAuthor;
 import com.eg.testsharding.bean.github.GithubPoem;
+import com.eg.testsharding.bean.mapper.AuthorMapper;
+import com.eg.testsharding.bean.mapper.PoemMapper;
 import com.eg.testsharding.util.SimplifiedAndTraditionalUtil;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -42,39 +42,41 @@ public class PrepareDatabase {
         }
         //自增的序列号，决定进哪个库
         long sequence = 1;
-        for (File file : files) {
-            String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            List<GithubPoem> githubPoemList = JSON.parseArray(jsonString, GithubPoem.class);
-            for (GithubPoem githubPoem : githubPoemList) {
-                Poem poem = new Poem();
-                //拷贝属性
-                poem.setTitle(githubPoem.getTitle());
-                poem.setAuthor(githubPoem.getAuthor());
-                //github原本是，没一句诗是组成列表，我把它直接拼接到一起
-                StringBuilder paragraphs = new StringBuilder();
-                for (String paragraph : githubPoem.getParagraphs()) {
-                    paragraphs.append(paragraph);
+        while (true)
+            for (File file : files) {
+                String jsonString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+                List<GithubPoem> githubPoemList = JSON.parseArray(jsonString, GithubPoem.class);
+                for (GithubPoem githubPoem : githubPoemList) {
+                    Poem poem = new Poem();
+                    //拷贝属性
+                    poem.setTitle(githubPoem.getTitle());
+                    poem.setAuthor(githubPoem.getAuthor());
+                    //github原本是，没一句诗是组成列表，我把它直接拼接到一起
+                    StringBuilder paragraphs = new StringBuilder();
+                    for (String paragraph : githubPoem.getParagraphs()) {
+                        paragraphs.append(paragraph);
+                    }
+                    //朝代
+                    if (file.getName().contains("song")) {
+                        poem.setDynasty(0);
+                    } else if (file.getName().contains("tang")) {
+                        poem.setDynasty(1);
+                    }
+                    poem.setParagraphs(paragraphs.toString());
+                    //最后一步，繁体转简体
+                    poem.setTitle(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getTitle()));
+                    poem.setAuthor(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getAuthor()));
+                    poem.setParagraphs(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getParagraphs()));
+                    //设置id，决定进哪个库
+                    poem.setSequence(sequence);
+                    System.out.print(sequence);
+                    sequence++;
+                    //保存到数据库
+                    //设置id
+                    poemMapper.insert(poem);
+                    System.out.println(" " + poem.getTitle());
                 }
-                //朝代
-                if (file.getName().contains("song")) {
-                    poem.setDynasty(0);
-                } else if (file.getName().contains("tang")) {
-                    poem.setDynasty(1);
-                }
-                poem.setParagraphs(paragraphs.toString());
-                //最后一步，繁体转简体
-                poem.setTitle(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getTitle()));
-                poem.setAuthor(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getAuthor()));
-                poem.setParagraphs(SimplifiedAndTraditionalUtil.traditionalToSimplified(poem.getParagraphs()));
-                //设置id，决定进哪个库
-                poem.setSequence(sequence);
-                System.out.println(sequence);
-                sequence++;
-                //保存到数据库
-                poemMapper.insert(poem);
-                System.out.println(poem);
             }
-        }
     }
 
     @Test
