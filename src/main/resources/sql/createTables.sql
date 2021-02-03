@@ -34,5 +34,7 @@ CREATE TABLE `dynasty`
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = Dynamic;
 
-INSERT INTO `dynasty` VALUES (0, '宋');
-INSERT INTO `dynasty` VALUES (1, '唐');
+INSERT INTO `dynasty`
+VALUES (0, '宋');
+INSERT INTO `dynasty`
+VALUES (1, '唐');
